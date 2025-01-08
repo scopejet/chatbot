@@ -2,35 +2,67 @@ const chatLog = document.getElementById('chat-log');
 const userInput = document.getElementById('user-input');
 const sendButton = document.getElementById('send-button');
 
-const botResponses = {
-    "hello": "Hi there!",
-    "how are you": "I'm doing well, thank you!",
-    "what is your name": "I'm a simple chatbot.",
-    "bye": "Goodbye!",
-    "default": "I'm not sure what you mean. Can you try asking something else?"
-};
+const geminiApiKey = "AIzaSyC460EvP-2yVdmq2W-lhjI5a9uwHnc7lhc"; // Replace with your actual API key
 
-function sendMessage(message, isUser) {
+async function sendMessage(message, isUser) {
     const messageDiv = document.createElement('div');
     messageDiv.classList.add(isUser ? 'user-message' : 'bot-message');
     messageDiv.textContent = message;
     chatLog.appendChild(messageDiv);
-    chatLog.scrollTop = chatLog.scrollHeight; // Scroll to the bottom
+    chatLog.scrollTop = chatLog.scrollHeight;
 }
 
-function handleUserInput() {
-    const userMessage = userInput.value.trim().toLowerCase();
+async function fetchGeminiResponse(userMessage) {
+    try {
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiApiKey}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              contents: [{
+                   parts:[{
+                      text: `You are a helpful chatbot that assists users on a website. The users message is: ${userMessage}`
+                   }]
+              }]
+            }),
+        });
+
+         if (!response.ok) {
+            // Handle different HTTP error responses
+            if (response.status === 401) {
+                 throw new Error('Invalid API Key');
+            } else if (response.status === 404) {
+                throw new Error('Gemini resource was not found');
+            }else if (response.status === 429) {
+                throw new Error('Too many request for Gemini API. Try again later');
+            } else {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+        }
+
+        const data = await response.json();
+        return data.candidates[0].content.parts[0].text;
+    } catch (error) {
+        console.error("Error fetching Gemini response:", error);
+        return "Sorry, I encountered an error. Please try again later.";
+    }
+}
+
+async function handleUserInput() {
+    const userMessage = userInput.value.trim();
     if (userMessage === "") return;
 
-    sendMessage(userInput.value, true); // Show user's message
+    sendMessage(userInput.value, true);
 
-    // Get a chatbot response
-    const botResponse = botResponses[userMessage] || botResponses.default;
-    setTimeout(() => { // Delay for effect
-      sendMessage(botResponse, false); // Show bot's response
+    // Get the chatbot response from Gemini
+    const botResponse = await fetchGeminiResponse(userMessage);
+
+    setTimeout(() => {
+        sendMessage(botResponse, false);
     }, 500);
 
-    userInput.value = ""; // Clear input field
+    userInput.value = "";
 }
 
 sendButton.addEventListener('click', handleUserInput);
