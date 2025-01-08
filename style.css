@@ -1,7 +1,13 @@
+#chat-bot-title {
+    text-align: center;
+    margin-bottom: 10px;
+    font-family: sans-serif;
+}
+
 #chat-container {
-    width: 400px; /* Increased width */
+    width: 400px;
     border: 1px solid #eee;
-    margin: 20px auto; /* Center horizontally */
+    margin: 20px auto;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -11,7 +17,7 @@
 }
 
 #chat-log {
-    height: 400px; /* Increased height */
+    height: 400px;
     overflow-y: scroll;
     border-bottom: 1px solid #eee;
     padding: 10px;
@@ -23,8 +29,8 @@
     margin: 8px 0;
     border-radius: 20px;
     word-wrap: break-word;
-    font-family: sans-serif; /* Added font-family */
-    font-size: 1rem; /* Added font-size */
+    font-family: sans-serif;
+    font-size: 1rem;
     line-height: 1.4;
 }
 
@@ -35,7 +41,7 @@
 }
 
 .user-message {
-    background-color: #e0f7fa; /* Light cyan */
+    background-color: #e0f7fa;
     align-self: flex-end;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
@@ -46,20 +52,18 @@
     align-items: center;
 }
 
-#user-input, #file-input {
+#user-input {
     flex: 1;
     padding: 12px;
     margin-right: 8px;
     border: 1px solid #ccc;
-    border-radius: 25px; /* Added border-radius */
+    border-radius: 25px;
     outline: none;
     font-size: 1rem;
     font-family: sans-serif;
 }
-
-#file-input{
-  padding: 0px 5px; /* Added some padding to the file upload button */
-  border-radius: 5px;
+#file-input {
+    display: none; /* hide the file input button*/
 }
 
 #send-button {
@@ -68,11 +72,12 @@
     color: white;
     border: none;
     cursor: pointer;
-    border-radius: 25px; /* Added border-radius */
+    border-radius: 25px;
     font-size: 1rem;
     font-family: sans-serif;
     outline: none;
     transition: background-color 0.2s;
+    height: 45px; /* Set the button height to match text input*/
 }
 
 #send-button:hover {
