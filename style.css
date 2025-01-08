@@ -1,49 +1,80 @@
 #chat-container {
-    width: 300px;
-    border: 1px solid #ccc;
-    margin: 20px;
-    padding: 10px;
+    width: 400px; /* Increased width */
+    border: 1px solid #eee;
+    margin: 20px auto; /* Center horizontally */
+    padding: 20px;
     display: flex;
     flex-direction: column;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
 }
 
 #chat-log {
-    height: 300px;
+    height: 400px; /* Increased height */
     overflow-y: scroll;
     border-bottom: 1px solid #eee;
+    padding: 10px;
+}
+
+.bot-message, .user-message {
+    max-width: 80%;
+    padding: 10px 15px;
+    margin: 8px 0;
+    border-radius: 20px;
+    word-wrap: break-word;
+    font-family: sans-serif; /* Added font-family */
+    font-size: 1rem; /* Added font-size */
+    line-height: 1.4;
 }
 
 .bot-message {
     background-color: #f0f0f0;
-    padding: 8px;
-    margin: 5px 0;
-    border-radius: 5px;
     align-self: flex-start;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .user-message {
-    background-color: #d0e9ff;
-    padding: 8px;
-    margin: 5px 0;
-    border-radius: 5px;
+    background-color: #e0f7fa; /* Light cyan */
     align-self: flex-end;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 #input-area {
     display: flex;
-    margin-top: 10px;
+    margin-top: 15px;
+    align-items: center;
 }
 
-#user-input {
+#user-input, #file-input {
     flex: 1;
-    padding: 8px;
-    margin-right: 5px;
+    padding: 12px;
+    margin-right: 8px;
+    border: 1px solid #ccc;
+    border-radius: 25px; /* Added border-radius */
+    outline: none;
+    font-size: 1rem;
+    font-family: sans-serif;
+}
+
+#file-input{
+  padding: 0px 5px; /* Added some padding to the file upload button */
+  border-radius: 5px;
 }
 
 #send-button {
-    padding: 8px 12px;
-    background-color: #4CAF50;
+    padding: 12px 20px;
+    background-color: #4caf50;
     color: white;
     border: none;
     cursor: pointer;
+    border-radius: 25px; /* Added border-radius */
+    font-size: 1rem;
+    font-family: sans-serif;
+    outline: none;
+    transition: background-color 0.2s;
+}
+
+#send-button:hover {
+    background-color: #45a049;
 }
