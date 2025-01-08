@@ -2,7 +2,7 @@ const chatLog = document.getElementById('chat-log');
 const userInput = document.getElementById('user-input');
 const sendButton = document.getElementById('send-button');
 
-const geminiApiKey = "AIzaSyC460EvP-2yVdmq2W-lhjI5a9uwHnc7lhc"; // Replace with your actual API key
+const geminiApiKey = ""; // Replace with your actual API key
 
 async function sendMessage(message, isUser) {
     const messageDiv = document.createElement('div');
