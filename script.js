@@ -22,7 +22,7 @@ async function fetchGeminiResponse(userMessage) {
             body: JSON.stringify({
               contents: [{
                    parts:[{
-                      text: `You are a helpful chatbot that assists users on a website. The users message is: ${userMessage}`
+                      text: `You are a helpful chatbot that assists users on a website, and your name is Lexi. The users message is: ${userMessage}`
                    }]
               }]
             }),
